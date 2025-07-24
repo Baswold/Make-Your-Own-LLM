@@ -1,0 +1,39 @@
+# Core ML Dependencies
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.14.0
+tokenizers>=0.13.0
+
+# Training and Optimization
+accelerate>=0.20.0
+peft>=0.4.0
+bitsandbytes>=0.41.0
+
+# API and Web Framework
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+websockets>=11.0.0
+python-multipart>=0.0.6
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+pdfplumber>=0.9.0
+
+# System Monitoring
+psutil>=5.9.0
+GPUtil>=1.4.0
+
+# Development and Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Optional: For RAG mode (stretch goal)
+# faiss-cpu>=1.7.4
+# sentence-transformers>=2.2.0
+
+# Optional: For model optimization (stretch goal)
+# onnx>=1.14.0
+# onnxruntime>=1.15.0
