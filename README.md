@@ -125,6 +125,23 @@ make check             # Check environment
 make quick-start       # Setup + guidance for new users
 ```
 
+## 📦 Packaging
+
+Build desktop installers for the Electron version of the app:
+
+```bash
+cd frontend
+npm run electron:build
+```
+
+The command above runs `electron-builder` and produces a `.dmg` on macOS,
+a Windows installer using NSIS, and an AppImage for Linux. During development
+you can launch the Electron app with:
+
+```bash
+npm run electron:dev
+```
+
 ### API Endpoints
 
 #### Training API (Port 8000)
