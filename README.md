@@ -27,10 +27,30 @@ Train your own small language model on custom text data with one-click simplicit
 
 ### Installation
 
+#### 🚀 Option 1: One-Line Installer (Recommended)
+
+**Mac/Linux:**
+```bash
+curl -sSL https://raw.githubusercontent.com/Baswold/Make-Your-Own-LLM/main/install.sh | bash
+```
+
+**Windows:**
+1. Download `install.bat` from the repository
+2. Double-click to run, or execute from Command Prompt
+
+The installer will:
+- ✅ Check and install Python 3.8+, Node.js 18+, and Git
+- ✅ Clone the repository to your chosen location
+- ✅ Set up virtual environment and install all dependencies
+- ✅ Create startup scripts and desktop shortcuts
+- ✅ Test the installation automatically
+
+#### 🛠️ Option 2: Manual Installation
+
 1. **Clone and setup the project:**
    ```bash
-   git clone <repository-url>
-   cd make-your-own-llm
+   git clone https://github.com/Baswold/Make-Your-Own-LLM.git
+   cd Make-Your-Own-LLM
    make setup
    ```
 
@@ -39,10 +59,12 @@ Train your own small language model on custom text data with one-click simplicit
    make dev
    ```
 
-3. **Open your browser:**
-   - Frontend: http://localhost:3000
-   - Training API: http://localhost:8000
-   - Chat API: http://localhost:8001
+#### 🌐 Access the Application
+
+After installation, open your browser to:
+- **Frontend**: http://localhost:3000
+- **Training API**: http://localhost:8000  
+- **Chat API**: http://localhost:8001
 
 ### First Training Session
 
