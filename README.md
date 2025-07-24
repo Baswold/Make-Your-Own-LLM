@@ -6,6 +6,19 @@ Train your own small language model on custom text data with one-click simplicit
 
 ![Make Your Own LLM Demo](https://via.placeholder.com/800x400/4F46E5/FFFFFF?text=Make+Your+Own+LLM+Demo)
 
+## Table of Contents
+
+1. [Features](#-features)
+2. [Quick Start](#-quick-start)
+3. [Usage Guide](#-usage-guide)
+4. [Development](#-development)
+5. [Configuration](#-configuration)
+6. [Monitoring and Debugging](#-monitoring-and-debugging)
+7. [Example Workflows](#-example-workflows)
+8. [Stretch Goals & Future Features](#-stretch-goals--future-features)
+9. [Contributing](#-contributing)
+10. [License](#-license)
+
 ## ✨ Features
 
 - **🎯 One-Click Training**: Upload text files and start training with minimal configuration
