@@ -9,8 +9,12 @@ from datasets import Dataset
 import torch
 
 class DataProcessor:
-    def __init__(self, workspace_dir: str = "/workspace/data"):
-        self.workspace_dir = Path(workspace_dir)
+    def __init__(self, workspace_dir: str = None):
+        if workspace_dir is None:
+            # Use local data directory relative to the backend folder
+            self.workspace_dir = Path(__file__).parent.parent / "data"
+        else:
+            self.workspace_dir = Path(workspace_dir)
         self.workspace_dir.mkdir(parents=True, exist_ok=True)
     
     def process_upload(self, file_path: str, file_type: str) -> List[str]:

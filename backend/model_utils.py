@@ -29,8 +29,12 @@ class ModelManager:
         }
     }
     
-    def __init__(self, workspace_dir: str = "/workspace/data"):
-        self.workspace_dir = Path(workspace_dir)
+    def __init__(self, workspace_dir: str = None):
+        if workspace_dir is None:
+            # Use local data directory relative to the backend folder
+            self.workspace_dir = Path(__file__).parent.parent / "data"
+        else:
+            self.workspace_dir = Path(workspace_dir)
         self.device = self._get_best_device()
     
     def _get_best_device(self) -> str:

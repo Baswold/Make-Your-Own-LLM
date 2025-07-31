@@ -18,6 +18,32 @@ Train your own small language model on custom text data with one-click simplicit
 
 ## 🚀 Quick Start
 
+**The easiest way to get started:**
+
+```bash
+./start.sh
+```
+
+This single command will:
+- ✅ Check your environment (Python 3.11+, Node.js 18+)
+- 📦 Install all dependencies automatically
+- 🚀 Start all servers (training, chat, frontend)
+- 🌐 Open your browser to http://localhost:3000
+
+**Alternative methods:**
+
+```bash
+# Full setup with environment checks
+make quick-start
+
+# Manual setup
+make setup && make dev
+```
+
+**If you have tmux installed**, servers will run in a managed session. Otherwise, they'll run in the background.
+
+## 🚀 Quick Start (Original)
+
 ### Prerequisites
 
 - Python 3.11+
