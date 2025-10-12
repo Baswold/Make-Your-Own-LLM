@@ -22,7 +22,7 @@ function App() {
   const { data: trainingStatus } = useQuery(
     'training-status',
     () => fetch('/api/training-status').then(res => res.json()),
-    { 
+    {
       refetchInterval: isTraining ? 1000 : 5000,
       onSuccess: (data) => {
         setIsTraining(data.is_training)
@@ -52,7 +52,10 @@ function App() {
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="upload">Upload Data</TabsTrigger>
                 <TabsTrigger value="train">Train Model</TabsTrigger>
-                <TabsTrigger value="progress" disabled={!isTraining}>
+                <TabsTrigger
+                  value="progress"
+                  disabled={!isTraining && !trainingStatus?.progress}
+                >
                   Progress
                 </TabsTrigger>
                 <TabsTrigger value="chat" disabled={!currentProject}>
@@ -71,6 +74,7 @@ function App() {
               <TabsContent value="train" className="mt-6">
                 <TrainingWizard
                   currentProject={currentProject}
+                  systemInfo={systemInfo}
                   onTrainingStarted={() => {
                     setIsTraining(true)
                     setActiveTab('progress')
