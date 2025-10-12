@@ -117,13 +117,14 @@ try:
         try:
             print(f"\nTesting {size} model:")
             start = time.time()
-            model, tokenizer = manager.load_model_and_tokenizer(size)
+            model, tokenizer, hardware = manager.load_model_and_tokenizer(size)
             load_time = time.time() - start
-            
+
             # Count parameters
             param_count = sum(p.numel() for p in model.parameters())
-            
+
             print(f"  ✅ Model Loading: {load_time:.2f}s ({param_count:,} parameters)")
+            print(f"  ⚙️  Hardware profile: {hardware.profile} ({hardware.device}, {hardware.precision})")
             
             # Test inference speed
             test_input = "Tell me a story"

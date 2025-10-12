@@ -24,10 +24,12 @@ const SystemMonitor = ({ systemInfo }) => {
     return 'text-green-600 bg-green-100'
   }
 
+  const hardwareProfiles = systemInfo.hardware_profiles || {}
+
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border">
       <h3 className="font-medium text-sm mb-3">System Status</h3>
-      
+
       <div className="space-y-3">
         {/* Device Type */}
         <div className="flex items-center justify-between">
@@ -36,7 +38,7 @@ const SystemMonitor = ({ systemInfo }) => {
             <span className="text-xs text-gray-600">Device</span>
           </div>
           <div className="text-xs font-medium">
-            {systemInfo.device.toUpperCase()}
+            {systemInfo.device.toUpperCase()} ({(systemInfo.precision || 'fp32').toUpperCase()})
           </div>
         </div>
 
@@ -106,6 +108,21 @@ const SystemMonitor = ({ systemInfo }) => {
             </div>
           </div>
         )}
+
+        {/* Hardware Profiles */}
+        <div className="pt-2 border-t mt-2">
+          <p className="text-[11px] font-medium text-gray-500 uppercase mb-1">Hardware Profiles</p>
+          <div className="space-y-1">
+            {Object.entries(hardwareProfiles).map(([key, profile]) => (
+              <div key={key} className="flex items-center justify-between text-xs">
+                <span className="capitalize">{key.replace('_', ' ')}</span>
+                <span className={profile.available ? 'text-green-600' : 'text-gray-400'}>
+                  {profile.available ? `Ready${profile.device ? ` (${profile.device.toUpperCase()})` : ''}` : 'Unavailable'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Warning for CPU-only mode */}
@@ -114,6 +131,14 @@ const SystemMonitor = ({ systemInfo }) => {
           <p className="text-yellow-800">
             Training on CPU will be slower. Consider using a GPU-enabled environment for better performance.
           </p>
+        </div>
+      )}
+
+      {systemInfo.warnings && (
+        <div className="mt-3 p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-700">
+          {systemInfo.warnings.map((warning, idx) => (
+            <div key={idx}>⚠️ {warning}</div>
+          ))}
         </div>
       )}
     </div>

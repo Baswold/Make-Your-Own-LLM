@@ -25,6 +25,8 @@ const ProgressDashboard = ({ trainingStatus, onTrainingComplete }) => {
     { step: 40, loss: 1.9 }
   ]
 
+  const hardware = progress.hardware || {}
+
   const formatTime = (minutes) => {
     if (minutes < 1) return `${Math.round(minutes * 60)}s`
     if (minutes < 60) return `${Math.round(minutes)}m`
@@ -81,7 +83,7 @@ const ProgressDashboard = ({ trainingStatus, onTrainingComplete }) => {
             <div className="text-2xl font-bold text-gray-900">{currentEpoch}</div>
             <div className="text-xs text-gray-500">Epoch {currentEpoch}/{totalEpochs}</div>
           </div>
-          
+
           <div className="text-center">
             <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-full mx-auto mb-2">
               <Zap className="w-4 h-4 text-green-600" />
@@ -99,7 +101,7 @@ const ProgressDashboard = ({ trainingStatus, onTrainingComplete }) => {
             </div>
             <div className="text-xs text-gray-500">Current Loss</div>
           </div>
-          
+
           <div className="text-center">
             <div className="flex items-center justify-center w-8 h-8 bg-orange-100 rounded-full mx-auto mb-2">
               <Clock className="w-4 h-4 text-orange-600" />
@@ -108,6 +110,34 @@ const ProgressDashboard = ({ trainingStatus, onTrainingComplete }) => {
               {progress.eta_minutes ? formatTime(progress.eta_minutes) : '--'}
             </div>
             <div className="text-xs text-gray-500">ETA</div>
+          </div>
+        </div>
+
+        {/* Hardware summary */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg border">
+          <div>
+            <p className="text-xs text-gray-500 uppercase tracking-wide">Hardware</p>
+            <p className="text-sm text-gray-800 font-medium">
+              {hardware.device ? hardware.device.toUpperCase() : 'Unknown'}
+            </p>
+            <p className="text-xs text-gray-500">
+              Profile: {hardware.profile || 'auto'} • Precision: {hardware.precision ? hardware.precision.toUpperCase() : 'FP32'}
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 uppercase tracking-wide">Overrides</p>
+            <div className="text-xs text-gray-600 space-y-1">
+              {hardware.training_overrides ? (
+                Object.entries(hardware.training_overrides).map(([key, value]) => (
+                  <div key={key} className="flex justify-between">
+                    <span className="capitalize">{key.replace(/_/g, ' ')}</span>
+                    <span className="font-mono">{String(value)}</span>
+                  </div>
+                ))
+              ) : (
+                <p>No overrides reported</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -154,6 +184,8 @@ const ProgressDashboard = ({ trainingStatus, onTrainingComplete }) => {
             <div className="space-y-1">
               <div>[INFO] Training started for project: {trainingStatus.project}</div>
               <div>[INFO] Model size: {progress.model_size || 'unknown'}</div>
+              <div>[INFO] Target device: {hardware.device ? hardware.device.toUpperCase() : 'AUTO'}</div>
+              <div>[INFO] Precision mode: {hardware.precision ? hardware.precision.toUpperCase() : 'FP32'}</div>
               <div>[INFO] Current epoch: {currentEpoch}/{totalEpochs}</div>
               <div>[INFO] Current step: {currentStep}/{totalSteps}</div>
               <div>[INFO] Progress: {progressPercent}%</div>
